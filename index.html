@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>眼镜镜片选购指南 · 折射率交互对比</title>
+<style>
+  :root{
+    --bg:#f5f6f8;
+    --card:#ffffff;
+    --border:#e7e8ec;
+    --border-strong:#d6d8df;
+    --text:#1c1d21;
+    --muted:#6f7178;
+    --faint:#9a9ca3;
+    --blue:#378ADD;
+    --teal:#1D9E75;
+    --amber:#EF9F27;
+    --coral:#D85A30;
+    --red:#E24B4A;
+    --purple:#534AB7;
+    --pink:#D4537E;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Segoe UI",Roboto,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 16px 64px;}
+
+  header.top{
+    padding:40px 4px 28px;
+  }
+  .kicker{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:600;letter-spacing:0.08em;
+    color:var(--blue);text-transform:uppercase;margin-bottom:12px;
+  }
+  .kicker::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);}
+  header.top h1{font-size:30px;font-weight:700;line-height:1.25;letter-spacing:-0.01em;margin-bottom:10px;}
+  header.top p{color:var(--muted);font-size:14px;max-width:560px;}
+
+  .section{margin-top:40px;}
+  .sec-head{margin-bottom:16px;}
+  .sec-head h2{font-size:20px;font-weight:700;letter-spacing:-0.01em;}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-top:4px;}
+
+  .grid{display:grid;gap:14px;}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
+
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 18px 20px;
+    box-shadow:0 1px 2px rgba(17,24,39,0.04);
+    transition:box-shadow .2s ease, transform .2s ease;
+  }
+  .card:hover{box-shadow:0 6px 20px rgba(17,24,39,0.07);transform:translateY(-1px);}
+  .card h3{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:9px;}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none;box-shadow:0 0 0 3px rgba(0,0,0,0.04);}
+  .card p{font-size:13px;color:var(--muted);}
+  .card ul{list-style:none;margin-top:6px;}
+  .card ul li{font-size:13px;color:#3a3c42;padding:4px 0 4px 18px;position:relative;}
+  .card ul li::before{content:"";position:absolute;left:4px;top:12px;width:5px;height:5px;border-radius:50%;background:var(--faint);}
+
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);background:var(--card);border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px;}
+  th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);}
+  th{background:#fafbfc;font-weight:600;color:var(--muted);font-size:12px;white-space:nowrap;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:#fafbfc;}
+  .rec{font-weight:600;color:var(--text);}
+
+  .controls{
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+    margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);
+  }
+  .controls label{font-size:13px;font-weight:600;white-space:nowrap;}
+  .deg-box{
+    flex:1;min-width:160px;display:flex;align-items:center;gap:12px;
+  }
+  input[type=range]{
+    flex:1;min-width:120px;accent-color:var(--blue);height:28px;cursor:pointer;
+    -webkit-appearance:none;appearance:none;background:transparent;
+  }
+  input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:#e9ebef;}
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;
+    background:var(--blue);border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.25);
+    margin-top:-8px;cursor:pointer;
+  }
+  input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:#e9ebef;}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.25);}
+  .deg-readout{
+    font-size:16px;font-weight:700;min-width:64px;text-align:right;
+    color:var(--blue);font-variant-numeric:tabular-nums;
+  }
+
+  .metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px;}
+  .metric{
+    background:#fafbfc;border:1px solid var(--border);border-radius:12px;
+    padding:13px 14px;position:relative;overflow:hidden;
+  }
+  .metric::after{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:var(--mc,var(--blue));
+  }
+  .metric .lbl{font-size:12px;color:var(--muted);font-weight:500;}
+  .metric .val{font-size:20px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums;}
+  .metric .abe{font-size:11px;color:var(--faint);}
+
+  .lens-panel{border:1px solid var(--border);border-radius:var(--radius);padding:18px 14px 10px;background:#fff;}
+  .lens-panel .cap{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .lens-panel .cap::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);}
+  svg.lens{width:100%;display:block;}
+
+  .note{
+    margin-top:24px;background:#fff8e6;border:1px solid #f0e0b0;border-radius:14px;
+    padding:14px 18px;font-size:13px;color:#6b5610;
+  }
+  .note b{color:#5a4308;}
+  .foot{color:var(--faint);font-size:12px;margin-top:48px;text-align:center;}
+
+  @media (max-width:640px){
+    .wrap{padding:0 14px 48px;}
+    header.top{padding:28px 2px 20px;}
+    header.top h1{font-size:25px;}
+    .section{margin-top:32px;}
+    .sec-head h2{font-size:18px;}
+    .card{padding:16px 16px 18px;}
+    .card:hover{transform:none;box-shadow:0 1px 2px rgba(17,24,39,0.04);}
+    .metric-grid{grid-template-columns:repeat(2,1fr);}
+    .metric .val{font-size:18px;}
+    .g2{grid-template-columns:1fr;}
+    .g4{grid-template-columns:repeat(2,1fr);}
+    .controls{flex-direction:column;align-items:stretch;}
+    .deg-readout{text-align:left;}
+    .lens-panel{padding:14px 8px 8px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="kicker">Eyewear Lens Guide</div>
+    <h1>眼镜镜片选购指南</h1>
+    <p>折射率、阿贝数、球面／非球面、防蓝光、镀膜、渐进多焦 —— 一目了然，看懂再配镜。</p>
+  </header>
+
+  <div class="section">
+    <div class="sec-head">
+      <h2>折射率交互对比</h2>
+      <p class="sub">拖动度数滑杆，即时比较五种折射率镜片的中心厚度。折射率越高镜片越薄，但阿贝数（清晰度）会下降。</p>
+    </div>
+
+    <div class="card">
+      <div class="controls">
+        <label>近视度数</label>
+        <div class="deg-box">
+          <input type="range" id="degSlider" min="100" max="1200" step="50" value="600" aria-label="近视度数滑杆">
+          <span class="deg-readout" id="degLabel">-6.00 D</span>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric" style="--mc:#378ADD"><div class="lbl">折射率 1.50</div><div class="val" id="th150">—</div><div class="abe">阿贝数 58</div></div>
+        <div class="metric" style="--mc:#1D9E75"><div class="lbl">折射率 1.56</div><div class="val" id="th156">—</div><div class="abe">阿贝数 42</div></div>
+        <div class="metric" style="--mc:#EF9F27"><div class="lbl">折射率 1.60</div><div class="val" id="th160">—</div><div class="abe">阿贝数 42</div></div>
+        <div class="metric" style="--mc:#D85A30"><div class="lbl">折射率 1.67</div><div class="val" id="th167">—</div><div class="abe">阿贝数 32</div></div>
+        <div class="metric" style="--mc:#E24B4A"><div class="lbl">折射率 1.74</div><div class="val" id="th174">—</div><div class="abe">阿贝数 33</div></div>
+      </div>
+
+      <div class="lens-panel">
+        <div class="cap">镜片剖面厚度对比（同度数）</div>
+        <svg id="lensSvg" class="lens" viewBox="0 0 680 190" preserveAspectRatio="xMidYMid meet" role="img" aria-label="不同折射率镜片剖面厚度对比"></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">
+      <h2>物理角度：折射如何影响光线</h2>
+      <p class="sub">折射率越高，光线在镜片内弯曲越大，因此能用更薄的镜片达到相同的屈光矫正。下方为同一束光穿过不同折射率镜片的偏折示意。</p>
+    </div>
+    <div class="card">
+      <div class="lens-panel" style="border:none;padding:6px 8px 4px;">
+        <div class="cap">光线折射对比（入射角相同，度数相同）</div>
+        <svg id="refractSvg" class="lens" viewBox="0 0 680 230" preserveAspectRatio="xMidYMid meet" role="img" aria-label="不同折射率下光线偏折角度对比"></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">
+      <h2>按度数选折射率</h2>
+      <p class="sub">厚度差异在低度数时不明显，高度数时被放大。参考下表选择。</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>度数范围</th><th>推荐折射率</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td>0 – 200 度</td><td class="rec">1.50 / 1.56</td><td>厚度差异小，保留高阿贝数更清晰</td></tr>
+          <tr><td>200 – 400 度</td><td class="rec">1.56 / 1.60</td><td>薄度与清晰度平衡</td></tr>
+          <tr><td>400 – 600 度</td><td class="rec">1.60 / 1.67</td><td>明显减薄，仍可接受色散</td></tr>
+          <tr><td>600 – 800 度</td><td class="rec">1.67 / 1.74</td><td>厚度成为主要矛盾</td></tr>
+          <tr><td>800 度以上</td><td class="rec">1.74</td><td>追求最薄</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">
+      <h2>核心参数速查</h2>
+      <p class="sub">配镜时在验光单上会看到这些数据，了解含义才不会被误导。</p>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="dot" style="background:var(--blue)"></span>折射率 Refractive Index</h3>
+        <ul>
+          <li>决定镜片厚度：1.50 → 1.74 越薄</li>
+          <li>度数越高，选折射率越高的收益越大</li>
+          <li>折射率升高常伴随阿贝数下降</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--teal)"></span>阿贝数 Abbe Number</h3>
+        <ul>
+          <li>越高 = 色散越小、成像越清晰</li>
+          <li>一般介于 32 – 58</li>
+          <li>与折射率常成反比，需权衡</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--pink)"></span>球面 vs 非球面</h3>
+        <ul>
+          <li>非球面：边缘变形小、更薄更平</li>
+          <li>中高度数（&gt;300 度）优先非球面</li>
+          <li>外观更美观，视野更自然</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--amber)"></span>防蓝光 Blue Cut</h3>
+        <ul>
+          <li>过滤电子屏有害蓝光，缓解疲劳</li>
+          <li>底色可能微黄、透光略降</li>
+          <li>长期用电脑／手机者适用</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--purple)"></span>镀膜 Coating</h3>
+        <ul>
+          <li>减反射、防污、防水、防刮、防静电</li>
+          <li>多层复合膜综合性能更佳</li>
+          <li>日常体验影响最大的一项</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--coral)"></span>光致变色 Transitions</h3>
+        <ul>
+          <li>遇紫外线自动变深，室内恢复</li>
+          <li>适合户外＋室内频繁切换</li>
+          <li>可兼做墨镜，一镜两用</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--red)"></span>渐进多焦 Progressive</h3>
+        <ul>
+          <li>一片镜片：远／中／近全程清晰</li>
+          <li>适合老花＋近视人群</li>
+          <li>需适应期，两侧有像差区</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:#8a8c93"></span>度数三要素</h3>
+        <ul>
+          <li>SPH 球镜（近视 -／远视 +）</li>
+          <li>CYL 柱镜（散光）、AXIS 轴位</li>
+          <li>PD 瞳距也须准确测量</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">
+      <h2>选购建议</h2>
+    </div>
+    <div class="grid g4">
+      <div class="card">
+        <h3><span class="dot" style="background:var(--blue)"></span>瞳距 PD</h3>
+        <p>必须测准，网上配镜最容易在此出错。</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--teal)"></span>别只追折射率</h3>
+        <p>高折射率虽薄，但清晰度下降，中低度数未必需要。</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--amber)"></span>镀膜优先</h3>
+        <p>防反光、易清洁是每天感受得到的，比花俏功能更值。</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--purple)"></span>验光为准</h3>
+        <p>处方（尤其散光轴位）以医院／专业机构为准。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>重要提醒：</b>本页厚度数值为简化估算模型，仅用于直观比较各折射率的相对差异，不代表真实镜片精确厚度（实际受镜框、瞳距、球面／非球面设计等因素影响）。实际配镜请以专业验光与镜片厂商数据为准。
+  </div>
+
+  <div class="foot">眼镜镜片选购指南 · 仅供参考，非医疗建议</div>
+</div>
+
+<script>
+(function(){
+  var keys = ['150','156','160','167','174'];
+  var label = {150:'1.50',156:'1.56',160:'1.60',167:'1.67',174:'1.74'};
+  var idx = {150:'th150',156:'th156',160:'th160',167:'th167',174:'th174'};
+  var col = {150:'#378ADD',156:'#1D9E75',160:'#EF9F27',167:'#D85A30',174:'#E24B4A'};
+
+  function thickness(n, d){
+    return 2.5*d*d/(n-1);
+  }
+
+  function render(){
+    var deg = +document.getElementById('degSlider').value;
+    var d = deg/100;
+    document.getElementById('degLabel').textContent = '-' + d.toFixed(2) + ' D';
+
+    var vals = {}, max = 0;
+    keys.forEach(function(k){
+      var n = +label[k];
+      var v = thickness(n, d);
+      vals[k]=v; if(v>max) max=v;
+    });
+
+    keys.forEach(function(k){
+      document.getElementById(idx[k]).textContent = (vals[k]/100).toFixed(1) + ' mm';
+    });
+
+    var svg = document.getElementById('lensSvg');
+    var midY=95, spanX=96, maxH=160, s='';
+    keys.forEach(function(k,i){
+      var x = 92 + i*spanX;
+      var cx = x + 40;
+      var h = Math.max(6, (vals[k]/max)*maxH);
+      var r = h/2;
+      var top = midY - r, bot = midY + r;
+      var curve = Math.max(4, r*0.35);
+      s += '<path d="M'+x+' '+top+' Q '+cx+' '+(top-curve)+' '+ (x+80)+' '+midY+' Q '+cx+' '+(bot+curve)+' '+x+' '+bot+' Z" fill="'+col[k]+'" fill-opacity="0.28" stroke="'+col[k]+'" stroke-width="1.5"/>';
+      s += '<text x="'+cx+'" y="186" text-anchor="middle" font-size="12" fill="#6f7178">'+label[k]+'</text>';
+      s += '<text x="'+cx+'" y="'+(top-8)+'" text-anchor="middle" font-size="11" fill="#1c1d21">'+(vals[k]/100).toFixed(1)+'mm</text>';
+    });
+    svg.innerHTML = s;
+  }
+
+  function renderRefraction(){
+    var svg = document.getElementById('refractSvg');
+    var s='';
+    var baseX = 90, spanX = 96, midY = 115;
+    var incident = 30;
+
+    keys.forEach(function(k,i){
+      var n = +label[k];
+      var x = baseX + i*spanX;
+      var cx = x + 40;
+      var lensW = 80, lensH = 70;
+      var top = midY - lensH/2, bot = midY + lensH/2;
+
+      s += '<path d="M'+x+' '+top+' Q '+cx+' '+(top-8)+' '+ (x+lensW)+' '+midY+' Q '+cx+' '+(bot+8)+' '+x+' '+bot+' Z" fill="'+col[k]+'" fill-opacity="0.20" stroke="'+col[k]+'" stroke-width="1.5"/>';
+
+      var a = incident * Math.PI/180;
+      var sinR = Math.sin(a)/n;
+      var rAng = Math.asin(Math.min(1, sinR));
+      var dInt = Math.tan(rAng) * 46;
+      var dOut = Math.tan(a) * 46;
+      var inX = cx - 46, inY = midY - dInt;
+      var outX = cx + 46, outY = midY - dOut;
+
+      s += '<line x1="'+(cx-72)+'" y1="'+(midY-32)+'" x2="'+inX+'" y2="'+inY+'" stroke="#8a8c93" stroke-width="1" stroke-dasharray="3 2"/>';
+      s += '<line x1="'+inX+'" y1="'+inY+'" x2="'+outX+'" y2="'+outY+'" stroke="'+col[k]+'" stroke-width="1.8"/>';
+      s += '<line x1="'+outX+'" y1="'+outY+'" x2="'+(cx+72)+'" y2="'+(outY+ (outY-midY)) +'" stroke="#8a8c93" stroke-width="1" stroke-dasharray="3 2"/>';
+
+      s += '<text x="'+cx+'" y="216" text-anchor="middle" font-size="12" fill="#6f7178">n='+label[k]+'</text>';
+      s += '<text x="'+cx+'" y="'+(midY+42)+'" text-anchor="middle" font-size="11" fill="'+col[k]+'">偏折 '+(rAng*180/Math.PI).toFixed(0)+'°</text>';
+    });
+
+    svg.innerHTML = s;
+  }
+
+  document.getElementById('degSlider').addEventListener('input', function(){
+    render();
+    renderRefraction();
+  });
+  render();
+  renderRefraction();
+})();
+</script>
+</body>
+</html>
